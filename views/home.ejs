@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <% if (locals.id) { %>
+        <p>Url generated:https://localhost:8001/url/<%= id %></p>
+     
+    <% } %>
+    <h1>hi from server</h1>   
+    <form method="POST" action="/url"> 
+        <label >Enter your original url</label>
+        <input type="text" name="url" placeholder="https://expample.com">
+        <button type="submit"> Generate</button>
+    </form>
+    <% if (locals.Urls) { %>
+        <table border="1">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Complete URL</th>
+            <th>Short URL</th>
+            <th>Times Clicked</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% Urls.forEach((url, index) => { %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= url.GivenUrl %></td>
+                <td><%= url.ShortUrl %></td>
+                <td><%= url.visitHistory.length %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+     
+    <% } %>
+    
+</body>
+</html>

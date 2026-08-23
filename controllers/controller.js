@@ -1,8 +1,8 @@
 const express=require("express")
-const app=express()
+
 const ShortId=require("short-id")
 const {Model}=require("../models/user")
-app.use(express.json());
+
 
 ShortId.configure({
     length: 6,          
@@ -13,6 +13,7 @@ ShortId.configure({
 async function CreateShortId(req,res){
     const NewShortUrl=ShortId.generate();
     const body=req.body.url;
+    console.log(body)
     if(!body){return res.json({"error":"url is required"})}
     
     const NewUrl=await Model.create({
@@ -21,10 +22,13 @@ async function CreateShortId(req,res){
         visitHistory:[],
 
     })
-    return res.status(201).send({
-        status :"succesfully created new url",
-        newurl:NewShortUrl,
+     return res.render("home",{
+        id:NewShortUrl
     })
+    // return res.status(201).send({
+    //     status :"succesfully created new url",
+    //     newurl:NewShortUrl,
+    // })
 
 
 }
@@ -52,7 +56,7 @@ async function Redirect(req,res){
     
    
 )
-    //return res.json(container);
+   
     return res.redirect(container.GivenUrl)
 
 }
