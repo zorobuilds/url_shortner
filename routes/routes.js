@@ -1,4 +1,4 @@
-const express= require("express")
+const express= require("express") 
 
 const {CreateShortId,ReadById,Redirect,AaltyticData}=require("../controllers/controller")
 const routes=express.Router()
